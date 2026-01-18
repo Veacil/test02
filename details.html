@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NYC Citi Bike | Details</title>
+    <style>
+        body { margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #333; color: #333; }
+        
+        #bg-video {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -1; object-fit: cover; filter: blur(8px); transform: scale(1.3); 
+        }
+
+        nav { 
+            background-color: rgba(255, 255, 255, 0.95); padding: 10px 50px; 
+            display: flex; justify-content: space-between; align-items: center; 
+            position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+            box-sizing: border-box;
+        }
+        
+        .logo-link img { height: 80px; width: auto; margin-right: 0; transition: 0.3s; }
+        .logo-link img:hover { transform: scale(1.05); }
+
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { text-decoration: none; color: #333; font-weight: bold; transition: 0.3s; }
+        .nav-links a:hover { color: #007bff; }
+
+        .container { 
+            max-width: 900px; margin: 40px auto; background: rgba(255, 255, 255, 0.95); 
+            padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); 
+        }
+
+        h1 { text-align: center; color: #007bff; margin-bottom: 30px; }
+        p { line-height: 1.8; font-size: 1.1rem; margin-bottom: 20px; text-align: justify; }
+
+        .button-container { display: flex; justify-content: space-between; margin-top: 40px; }
+        .nav-btn { 
+            padding: 12px 25px; border-radius: 30px; text-decoration: none; font-weight: bold; 
+            color: white; transition: 0.3s; 
+        }
+        .back-btn { background-color: #6c757d; }
+        .next-btn { background-color: #007bff; }
+        .nav-btn:hover { opacity: 0.8; transform: translateY(-2px); }
+
+        footer { text-align: center; padding: 20px; color: white; margin-top: 40px; }
+    </style>
+</head>
+<body>
+    <video autoplay muted loop playsinline id="bg-video">
+        <source src="background.mp4" type="video/mp4">
+    </video>
+
+    <nav>
+        <a href="index.html" class="logo-link">
+            <img src="visuals/logo.png" alt="NYC Logo">
+        </a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="details.html">Details</a>
+            <a href="visualization.html">Visualization</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Project Details & Insights</h1>
+        <div class="text-content">
+            <p>Our analysis explores the intricate mobility patterns of New York City through the lens of the Citi Bike sharing system. By examining trip data, we uncover distinct behavioral trends that define how the city moves. One of the most prominent findings is the cyclical nature of demand—rush hour surges that pulse through key neighborhoods and commercial hubs during peak hours, illustrating how movement shifts from the structured commutes of the workweek to the recreation-driven patterns of the weekend.</p>
+            <p>Beyond general movement, the operational success of the network depends on the balance between bike inflows and outflows at individual stations. This research identifies critical logistical imbalances, pinpointing "source" stations that experience persistent shortages and "sink" stations where bikes tend to accumulate excessively. Mapping these disparities is essential for optimizing rebalancing strategies and ensuring that the system remains reliable and accessible for all users at any given time.</p>
+            <p>Ultimately, every bike trip represents more than just a commute; it is a measurable contribution to carbon reduction. By analyzing historical data, we utilize a statistical model to quantify carbon emission savings using total distance traveled and trip frequency as key variables. In addition to assessing past performance, we provide data-driven forecasts to estimate the environmental impact and carbon savings the system is projected to achieve in the months ahead.</p>
+        </div>
+
+        <div class="button-container">
+            <a href="index.html" class="nav-btn back-btn">← Back to Home</a>
+            <a href="visualization.html" class="nav-btn next-btn">Visualizations →</a>
+        </div>
+    </div>
+
+    <footer>© 2026 NYC Bike Project</footer>
+</body>
+</html>

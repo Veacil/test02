@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NYC Citi Bike | Home</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- GENEL AYARLAR --- */
+        body { 
+            margin: 0; padding: 0; 
+            font-family: Arial, sans-serif; 
+            background-color: #333; color: #333; overflow: hidden; height: 100vh; 
+        }
+        
+        /* VIDEO ARKA PLAN */
+        #bg-video {
+            position: fixed; top: 50%; left: 50%;
+            min-width: 100%; min-height: 100%;
+            width: auto; height: auto;
+            z-index: -1;
+            object-fit: cover;
+            will-change: transform;
+            transform: translate(-50%, -50%) scale(1.3) translateZ(0);
+            backface-visibility: hidden;
+            filter: blur(4px) brightness(0.6);
+        }
+
+        /* NAVIGASYON (Menü) */
+        nav { 
+            position: absolute; top: 0; width: 100%; 
+            padding: 20px 50px; 
+            display: flex; justify-content: space-between; align-items: center; 
+            z-index: 10; box-sizing: border-box;
+        }
+        
+        /* LOGO AYARI - Güncellendi */
+        .logo-link img { 
+            height: 100px; 
+            width: auto; 
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+            transition: transform 0.3s ease;
+        }
+        .logo-link img:hover { transform: scale(1.05); }
+
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { 
+            text-decoration: none; color: white; font-weight: bold; font-size: 1.1rem; 
+            text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; 
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+        .nav-links a:hover { color: #f1c40f; }
+
+        /* ORTA ALAN (Content Box) */
+        .content-box { 
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            text-align: center; color: white; z-index: 5; width: 80%;
+        }
+        .content-box h1 { 
+            font-family: 'Montserrat', sans-serif; font-size: 4.5rem; margin-bottom: 10px; 
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7); letter-spacing: -2px;
+        }
+        
+        /* BUTONLAR */
+        .cta-btn { 
+            display: inline-block; padding: 15px 40px; margin: 15px; 
+            border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 1.2rem; 
+            transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .cta-btn-secondary { background-color: #00AEEF; color: white; }
+        .cta-btn-secondary:hover { background-color: #008ac0; transform: scale(1.02); }
+
+        footer { 
+            position: absolute; bottom: 0; width: 100%;
+            padding: 30px 50px; 
+            display: flex; justify-content: space-between; align-items: flex-end;
+            color: white; box-sizing: border-box;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+        .footer-title { font-weight: bold; font-size: 1.1rem; }
+        .footer-names { text-align: left; font-size: 1.1rem; line-height: 1.5; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <video autoplay muted loop playsinline preload="auto" id="bg-video">
+        <source src="background.mp4" type="video/mp4">
+    </video>
+    
+    <nav>
+        <a href="index.html" class="logo-link">
+            <img src="visuals/logo.png" alt="NYC Logo">
+        </a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="details.html">Details</a>
+            <a href="visualization.html">Visualization</a>
+        </div>
+    </nav>
+
+    <div class="content-box">
+        <h1>NYC Citi Bike Analysis</h1>
+        <a href="details.html" class="cta-btn cta-btn-secondary">Explore the Details</a>
+        <a href="visualization.html" class="cta-btn cta-btn-secondary">View Visualizations</a>
+    </div>
+
+    <footer>
+        <div class="footer-names">
+            Mert Adad<br>Berra Yılmaz<br>Zeynep Sude Togay
+        </div>
+        <div class="footer-title">IE 421 - Term Project</div>
+    </footer>
+</body>
+</html>

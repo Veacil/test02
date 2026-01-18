@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NYC Citi Bike | Visualization</title>
+    <style>
+        /* GENEL AYARLAR */
+        body { 
+            margin: 0; padding: 0; 
+            font-family: Arial, sans-serif; 
+            background-color: #333; color: #333; overflow-x: hidden; 
+        }
+        
+        #bg-video {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -1; object-fit: cover; filter: blur(8px); transform: scale(1.3);
+        }
+
+        nav { 
+            background-color: rgba(255, 255, 255, 0.95); padding: 10px 50px; 
+            display: flex; justify-content: space-between; align-items: center; 
+            position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+            box-sizing: border-box;
+        }
+        
+        .logo-link img { height: 80px; width: auto; margin-right: 0; transition: 0.3s; }
+        .logo-link img:hover { transform: scale(1.05); }
+
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { text-decoration: none; color: #333; font-weight: bold; transition: 0.3s; }
+        .nav-links a:hover { color: #007bff; }
+
+        .main-container {
+            max-width: 1200px; margin: 40px auto; padding: 20px;
+        }
+
+        /* GRAFİK KARTLARI (GRID) */
+        .viz-grid {
+            display: grid; grid-template-columns: 1fr; gap: 40px;
+        }
+        
+        .viz-card {
+            background: rgba(255, 255, 255, 0.95); border-radius: 12px;
+            padding: 30px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            display: flex; flex-direction: column; align-items: center;
+        }
+
+        .viz-card h2 { color: #007bff; margin-bottom: 20px; font-size: 1.8rem; }
+        
+        .viz-img {
+            width: 100%; max-width: 900px; height: auto;
+            border-radius: 8px; border: 1px solid #ddd;
+            cursor: pointer; transition: transform 0.2s;
+        }
+        .viz-img:hover { transform: scale(1.01); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+
+        .viz-desc {
+            margin-top: 20px; font-size: 1.05rem; line-height: 1.6;
+            text-align: justify; max-width: 900px;
+        }
+
+        /* MAP KART ÖZEL AYARLARI */
+        .map-container { width: 100%; height: 600px; border-radius: 8px; overflow: hidden; border: 1px solid #ddd; }
+        iframe { width: 100%; height: 100%; border: none; }
+
+        footer { text-align: center; padding: 20px; color: white; margin-top: 40px; }
+
+        /* LIGHTBOX (Büyütme Efekti) */
+        #lightbox {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); z-index: 2000;
+            justify-content: center; align-items: center; cursor: pointer;
+        }
+        #lightbox img { max-width: 90%; max-height: 90%; border-radius: 5px; box-shadow: 0 0 20px rgba(255,255,255,0.2); }
+    </style>
+</head>
+<body>
+    <video autoplay muted loop playsinline id="bg-video">
+        <source src="background.mp4" type="video/mp4">
+    </video>
+
+    <nav>
+        <a href="index.html" class="logo-link">
+            <img src="visuals/logo.png" alt="NYC Logo">
+        </a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="details.html">Details</a>
+            <a href="visualization.html">Visualization</a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="viz-grid">
+            
+            <div class="viz-card">
+                <h2>Weekly Hourly Usage Heatmap</h2>
+                <img src="visuals/heatmap.png" alt="Heatmap" class="viz-img" onclick="openLightbox(this)">
+                <p class="viz-desc">
+                    This heatmap reveals the "heartbeat" of the city. We observe intense activity during weekday rush hours (8 AM and 5-6 PM), indicating heavy commuter usage. In contrast, weekends show a more dispersed, leisure-oriented pattern throughout the afternoon.
+                </p>
+            </div>
+
+            <div class="viz-card">
+                <h2>Regression Analysis: CO2 Savings</h2>
+                <img src="visuals/regression.png" alt="Regression Model" class="viz-img" onclick="openLightbox(this)">
+                <p class="viz-desc">
+                    Our regression model demonstrates a clear positive correlation between distance traveled and avoided CO2 emissions. The color gradient represents trip frequency, showing that while short trips are most common, longer trips contribute significantly to environmental savings.
+                </p>
+            </div>
+            
+            <div class="viz-card">
+                <h2>Station Activity Analysis</h2>
+                <img src="visuals/barchart.png" alt="Station Bar Chart" class="viz-img" onclick="openLightbox(this)">
+                <p class="viz-desc">
+                    This bar chart highlights the top stations with the highest inflow and outflow of bikes. It helps in identifying the most popular starting and ending points in the network, which is crucial for rebalancing efforts.
+                </p>
+            </div>
+
+            <div class="viz-card">
+                <h2>Interactive Network Flows</h2>
+                <div class="map-container">
+                    <iframe src="interactive.html"></iframe>
+                </div>
+                <p class="viz-desc">
+                    <strong>Explore the Map:</strong> This interactive visualization displays the balance of the network. 
+                    <br><br>
+                    <strong>Red & Blue:</strong> Colors represent the "Net Balance"—red markers are Sources (more departures), while blue markers are Sinks (more arrivals).
+                </p>
+            </div>
+
+        </div>
+    </div>
+    
+    <footer>© 2026 NYC Bike Project</footer>
+
+    <div id="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" onclick="event.stopPropagation()"> 
+    </div>
+
+    <script>
+        function openLightbox(imgElement) {
+            var lightbox = document.getElementById('lightbox');
+            var lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = imgElement.src; 
+            lightbox.style.display = 'flex';  
+        }
+        function closeLightbox() {
+            var lightbox = document.getElementById('lightbox');
+            lightbox.style.display = 'none'; 
+        }
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") { closeLightbox(); }
+        });
+    </script>
+</body>
+</html>
